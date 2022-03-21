@@ -1,32 +1,38 @@
 from tkinter import *
 
 WHITE = "#FFFFFF"
+BUTTON_PADX = 30
+BUTTON_PADY = 32
+BUTTON_WIDTH = 20
 
 window = Tk()
-window.title("Pomodoro")
+window.title("Tic Tac Toe")
 window.config(padx=50, pady=50, bg=WHITE)
 
-canvas = Canvas(width=300, height=400, bg=WHITE)
-grid_img = PhotoImage(file='grid_img')
-canvas.create_image(300, 300, image=grid_img)
+blank_img = PhotoImage(file='blank.png')
+circle_img = PhotoImage(file='circle.png')
+cross_img = PhotoImage(file='cross.png')
 
-# lt = Button(command=press, text="Start")
-# lt.grid(column=0, row=0)
-# mt = Button(command=press, text="Start")
-# mt.grid(column=0, row=1)
-# rt = Button(command=press, text="Start")
-# rt.grid(column=0, row=2)
-# lm = Button(command=press, text="Start")
-# lm.grid(column=1, row=0)
-# mm = Button(command=press, text="Start")
-# mm.grid(column=1, row=1)
-# rm = Button(command=press, text="Start")
-# rm.grid(column=1, row=2)
-# lb = Button(command=press, text="Start")
-# lb.grid(column=2, row=0)
-# mb = Button(command=press, text="Start")
-# mb.grid(column=2, row=1)
-# rb = Button(command=press, text="Start")
-# rb.grid(column=2, row=2)
+canvas = Canvas(width=600, height=600, bg=WHITE)
+grid_img = PhotoImage(file='grid.png')
+canvas.create_image(250, 250, image=grid_img)
+canvas.place(x=0, y=0)
+
+active = [None, None]
+
+
+class Btn:
+    def __init__(self, i, j):
+        self.placement = [i, j]
+        self.grid_btn = Button(command=self.press, image=blank_img)
+        self.grid_btn.grid(padx=BUTTON_PADX, pady=BUTTON_PADY, column=i, row=j)
+
+    def press(self):
+        print(self.placement)
+
+
+for i in range(3):
+    for j in range(3):
+        button = Btn(i, j)
 
 window.mainloop()
